@@ -1,0 +1,138 @@
+th,
+td {
+  text-align: left;
+  padding: 6px;
+  font-style: italic;
+  vertical-align: top;
+}
+
+th {
+    background-color: rgb(94, 101, 106);
+    vertical-align: top;
+}
+
+table {
+    border: 1px solid rgb(161, 149, 132);
+    border-radius: 5px;
+}
+
+#outermost-container {
+    width: 90%;
+    margin: 0px auto 0px auto;
+    background-color: rgb(28, 30, 31);
+    padding: 50px 20px;
+}
+
+html,
+body {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(28 30 31) !important;
+}
+
+
+html, body, input, textarea, select, button {
+    border-color: rgb(132 123 108);
+    color: rgb(255 255 255);
+}
+
+.center {
+  width: 960px;
+  margin: 10px auto 40px auto;
+  text-align: center;
+  color: #093b85;
+}
+
+#site-name {
+  display: inline-block;
+  width: 350px;
+  padding: 20px;
+}
+
+#site-title {
+    margin: 4px 0px 0px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Verdana;
+    color: rgb(255, 255, 255);
+}
+
+#site-slogan {
+  margin: 0px;
+  font-size: 17px;
+  font-family: Verdana;
+  color: #000;
+}
+
+#company-logo {
+    display: inline-block;
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(59 167 255);
+}
+
+
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+.cf:after {
+  clear: both;
+}
+
+/**
+* For IE 6/7 only
+* Include this rule to trigger hasLayout and contain floats.
+*/
+.cf {
+  *zoom: 1;
+}
+
+.div_cc {
+  display: flex;
+  flex-direction: row;
+}
+
+.div_a {
+  flex: 0.5;
+}
+
+.aa {
+    flex: 0.2;
+    background-color: rgb(107, 115, 120);
+    padding: 1rem;
+}
+
+.bb {
+    margin-left: 1rem;
+    padding: 1rem;
+    flex: 0.6;
+    background-color: rgb(49, 53, 55);
+}
+
+.cc {
+    flex: 0.2;
+    margin-left: 1rem;
+    background-color: rgb(90, 97, 100);
+    padding: 1rem;
+}
+
+input[type='number'] {
+    background: rgb(110 110 110);
+    width: 6rem;
+}
+.refer{
+  display: none;
+}
+  
+.footer{
+  display: none;
+}

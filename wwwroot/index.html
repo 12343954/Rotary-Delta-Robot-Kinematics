@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Delta Robot Forward/Inverse Kinematics Calculations</title>
+  <meta name='description' content='Javascript program to help you design your Delta Robot' />
+  <meta name='keywords' content='delta, robot, forward, inverse, kinematics' />
+  <meta name='author' content='Dan Royer' />
+  <link rel="stylesheet" href="css/style.css" media="screen">
+  <script type='text/javascript' src='js/jquery.min.js'></script>
+  <script type='text/javascript' src='js/ik_fk.js'></script>
+</head>
+
+<body>
+  <div id='outermost-container'>
+    <div class='cf'>
+      <div id="company-logo">
+        <img alt="Marginally Clever Robots" src="img/cropped-MC_Logo_Black_512x5122.png" height='64'></img>
+      </div>
+      <div id="site-name">
+        <a href="###" id="site-title">Marginally Clever Robots</a><br>
+      </div>
+    </div>
+
+    <h1>Rotary Delta Robot Forward/Inverse Kinematics Calculations</h1>
+
+    <p>Tweak your robot dimensions and see how it will affect your work envelope and your precision. Then adjust your
+      motor angles (thetas) or your tool position (XYZ) and see that the forward and inverse kinematics match.</p>
+    <p>We use this program to design <a href='http://www.marginallyclever.com/shop/delta-robots'>our delta robots</a>.
+      If you are building a custom machine and need a consult on firmware, wiring, or mechanical parts, we'd be happy to
+      contribute. Please contact us at <a href='http://marginallyclever.com'>Marginally Clever Software</a> and include
+      your numbers from this page.</p>
+    <div class="div_cc">
+      <div class="div_a aa">
+        <h3>Robot dimensions</h3>
+        <img src='img/rotaryDeltaCalc.JPG' alt='rotary Delta Robot Calculation'>
+      </div>
+      <div class="div_a bb">
+        <h3>Dimensions parameters</h3>
+        <table cellpadding='0' cellspacing='0'>
+          <tr>
+            <th width='180'>Base radius (f)</th>
+            <td width='260'><input type='number' name='f' id='f' value='63.0' placeholder="63.0" data-default="75.0"
+                onkeyup='test();' /> mm
+            </td>
+            <td>Distance from center of machine base to center of each motor shaft. More than likely this is the middle
+              of
+              the side of a triangle, NOT the corner.</td>
+          </tr>
+          <tr>
+            <th>Bicep length (rf)</th>
+            <td><input type='number' name='rf' id='rf' value='130.0' placeholder="130.0" data-default="100.0"
+                onkeyup='test();' />
+              mm</td>
+            <td>Distance from motor shaft to elbow</td>
+          </tr>
+          <tr>
+            <th>Forearm length (re)</th>
+            <td><input type='number' name='re' id='re' value='400.0' placeholder="400.0" data-default="300.0"
+                onkeyup='test();' />
+              mm</td>
+            <td>Distrance from elbow to the wrist</td>
+          </tr>
+          <tr>
+            <th>End Effector radius (e)</th>
+            <td><input type='number' name='e' id='e' value='35.0' placeholder="35.0" data-default="24.0"
+                onkeyup='test();' /> mm
+            </td>
+            <td>Distance from wrists to the center of the hand</td>
+          </tr>
+          <tr>
+            <th>Base to floor distance (b)</th>
+            <td><input type='number' name='b' id='b' value='500.0' placeholder="500.0" data-default="400.0"
+                onkeyup='test();' />
+              mm</td>
+            <td>As described</td>
+          </tr>
+          <tr>
+            <th>Steps per turn</th>
+            <td><input type='number' name='s' id='s' value='3200' placeholder="3200" data-default="3200"
+                onkeyup='test();' />
+            </td>
+            <td>The motor precision. 1.8 deg steppers are 200 steps per turn. At 1/16th microstepping that's 3200 steps
+              per
+              turn.</td>
+          </tr>
+          <tr>
+            <th><a href='https://en.wikipedia.org/wiki/Cuboid#Rectangular_cuboid' target='_blank'>Rectangular cuboid</a>
+              envelope</th>
+            <td id='bounds'></td>
+            <td>How big a box can the end effector reach? (end effector can actually move more than this)</td>
+          </tr>
+          <tr>
+            <th>motor angle limits</th>
+            <td id='limits'></td>
+            <td>How must the motors turn to move throughout the rectangular cuboid?</td>
+          </tr>
+          <tr>
+            <th>Center</th>
+            <td id='center'></td>
+            <td>Where is the middle of the envelope relative to the base (0,0,0)?</td>
+          </tr>
+          <tr>
+            <th>Home</th>
+            <td id='home'></td>
+            <td>Where is the tool when the arms are parallel to the floor?</td>
+          </tr>
+          <tr>
+            <th>Resolution</th>
+            <td id='res'></td>
+            <td>How precise can the movements be?</td>
+          </tr>
+        </table>
+
+
+      </div>
+      <div class="div_a cc">
+        <h3>Kinematics</h3>
+        <p><strong>Forward Kinematics</strong>: Change motor angles to see new XYZ position.</p>
+        <p><strong>Inverse Kinematics</strong>: Change XYZ to see new angles.</p>
+        <p>0 degrees is when the bicep is horizontal to the floor.</p>
+        <table cellpadding='0' cellspacing='0'>
+          <tr>
+            <th>Motor 1</th>
+            <td><input type='number' name='t1' id='t1' value='5.0' placeholder="" data-default=""
+                onkeyup='test_fk();' /> °</td>
+          </tr>
+          <tr>
+            <th>Motor 2</th>
+            <td><input type='number' name='t2' id='t2' value='10.0' placeholder="" data-default=""
+                onkeyup='test_fk();' /> °</td>
+          </tr>
+          <tr>
+            <th>Motor 3</th>
+            <td><input type='number' name='t3' id='t3' value='15.0' placeholder="" data-default=""
+                onkeyup='test_fk();' /> °</td>
+          </tr>
+
+          <tr>
+            <th>X</th>
+            <td><input type='number' name='x' id='x' value='' placeholder="" data-default="" onkeyup='test_ik();' /> mm
+            </td>
+          </tr>
+          <tr>
+            <th>Y</th>
+            <td><input type='number' name='y' id='y' value='' placeholder="" data-default="" onkeyup='test_ik();' /> mm
+            </td>
+          </tr>
+          <tr>
+            <th>Z</th>
+            <td><input type='number' name='z' id='z' value='' placeholder="" data-default="" onkeyup='test_ik();' /> mm
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="refer">
+      <p><em>Original equations from
+          <a href='http://forums.trossenrobotics.com/tutorials/introduction-129/delta-robot-kinematics-3276/'>Trossen
+            Robotics Forums</a></em>
+      </p>
+      <a
+        href="http://forums.trossenrobotics.com/tutorials/introduction-129/delta-robot-kinematics-3276/">http://forums.trossenrobotics.com/tutorials/introduction-129/delta-robot-kinematics-3276/</a>
+    </div>
+  </div>
+  <div class="footer">
+    <p class='center'>&copy; <a href='http://marginallyclever.com'>Marginally Clever Software</a> 2012</p>
+  </div>
+</body>
+
+</html>
