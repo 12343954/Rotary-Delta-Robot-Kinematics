@@ -5,12 +5,12 @@
 	</tr>
 </table>
 
-<h1>Rotary Delta Robot Kinematics ( <span style="color:#549b56">js</span> °¢<span style="color:#7882ff">C++</span> °¢<span style="color:#db4012">C#</span> )</h1>
+<h1>Rotary Delta Robot Kinematics ( <span style="color:#549b56">js</span> „ÄÅ<span style="color:#7882ff">C++</span> „ÄÅ<span style="color:#db4012">C#</span> )</h1>
 
 
 Forward/Inverse Kinematics algorithm for Rotary Delta Robot.
 
-Including `Web.js` °¢`C++` and `C#` versions compare, all results are matched!
+Including `Web.js` „ÄÅ`C++` and `C#` versions compare, all results are matched!
 
 Features:  
 1. Forward/Inverse Kinematics.
